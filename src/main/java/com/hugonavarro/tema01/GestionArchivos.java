@@ -1,7 +1,6 @@
 package com.hugonavarro.tema01;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 // Ejercicio 5
@@ -90,13 +89,32 @@ public class GestionArchivos {
             IO.println("\nEl archivo no existe");
         }
     }
+
+    // Ejercicio 6
+    public static void verContenidoDeUnArchivo(String directorio, String archivo) {
+        File f = new File(directorio, archivo);
+        if (f.exists()) {
+            try (
+                    FileReader fr = new FileReader(f);
+                    BufferedReader br = new BufferedReader(fr)
+            ){
+                String linea = br.readLine();
+                IO.println("\n" + linea);
+            } catch (IOException ioe) {
+                IO.println("\nFichero no encontrado");
+            }
+        } else {
+            IO.println("\nEl archivo no existe");
+        }
+    }
     public static void mostrarMenu() {
         IO.println("\nMENÚ A ELEGIR");
         IO.println("--------------------");
         IO.println("1 - Crear un archivo");
         IO.println("2 - Visualizar el contenido del directorio");
         IO.println("3 - Visualizar información de un archivo");
-        IO.println("4 - Salir");
+        IO.println("4 - Mostrar contenido de un archivo");
+        IO.println("5 - Salir");
         IO.print("\nElige una opción: ");
     }
 
@@ -119,13 +137,16 @@ public class GestionArchivos {
                     verInfo("/home/usuario/ADtema01/ficheros/", "archivo.txt");
                     break;
                 case 4:
+                    verContenidoDeUnArchivo("/home/usuario/ADtema01/ficheros/", "archivo.txt");
+                    break;
+                case 5:
                     IO.println("\nSaliendo...");
                     break;
                 default:
                     IO.println("\nOpción inválida");
                     break;
             }
-        } while (opcion != 4);
+        } while (opcion != 5);
         sc.close();
     }
 }
