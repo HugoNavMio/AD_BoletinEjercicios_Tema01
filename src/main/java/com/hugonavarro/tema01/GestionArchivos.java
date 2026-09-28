@@ -125,6 +125,7 @@ public class GestionArchivos {
             IO.println("\nError al leer el archivo (formato inválido o no existe)");
         }
     }
+
     public static void mostrarMenu() {
         IO.println("\nMENÚ A ELEGIR");
         IO.println("--------------------");
