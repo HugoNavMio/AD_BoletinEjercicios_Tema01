@@ -107,6 +107,24 @@ public class GestionArchivos {
             IO.println("\nEl archivo no existe");
         }
     }
+
+    // Ejercicio 7
+    public static void verContenidoDeUnArchivoBinario(String directorio, String archivo) {
+        String rutaCompleta = directorio + "/" + archivo;
+
+        try (FileInputStream fis = new FileInputStream(rutaCompleta)) {
+            int byteLeido;
+            IO.println();
+
+            while ((byteLeido = fis.read()) != -1) {
+                System.out.printf("%02X ", byteLeido);
+            }
+
+            IO.println();
+        } catch (IOException ioe) {
+            IO.println("\nError al leer el archivo (formato inválido o no existe)");
+        }
+    }
     public static void mostrarMenu() {
         IO.println("\nMENÚ A ELEGIR");
         IO.println("--------------------");
@@ -114,7 +132,8 @@ public class GestionArchivos {
         IO.println("2 - Visualizar el contenido del directorio");
         IO.println("3 - Visualizar información de un archivo");
         IO.println("4 - Mostrar contenido de un archivo");
-        IO.println("5 - Salir");
+        IO.println("5 - Ver contenido de un archivo binario");
+        IO.println("6 - Salir");
         IO.print("\nElige una opción: ");
     }
 
@@ -140,13 +159,16 @@ public class GestionArchivos {
                     verContenidoDeUnArchivo("/home/usuario/ADtema01/ficheros/", "archivo.txt");
                     break;
                 case 5:
+                    verContenidoDeUnArchivoBinario("/home/usuario/ADtema01/ficheros/", "archivobinario.bin");
+                    break;
+                case 6:
                     IO.println("\nSaliendo...");
                     break;
                 default:
                     IO.println("\nOpción inválida");
                     break;
             }
-        } while (opcion != 5);
+        } while (opcion != 6);
         sc.close();
     }
 }
